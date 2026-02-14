@@ -15,6 +15,11 @@ pip install behaviorci
 | `behaviorci init` | Scaffold a new example bundle |
 | `behaviorci validate` | Validate bundle configuration |
 | `behaviorci run` | Execute tests and emit report |
+| `behaviorci promote` | Run bundle and save as baseline |
+| `behaviorci diff` | Compare run against baseline |
+| `behaviorci agent init` | Scaffold a new agent bundle |
+| `behaviorci agent validate` | Validate agent bundle |
+| `behaviorci agent run` | Run agent bundle tests |
 | `behaviorci --version` | Show version |
 | `behaviorci --help` | Show help |
 
@@ -273,10 +278,100 @@ behaviorci run bundle.yaml --format markdown --output report.md
 
 ---
 
-## Planned Commands (v0.2+)
+## behaviorci promote
 
-| Command | Description |
-|---------|-------------|
-| `behaviorci promote` | Promote current run as new baseline |
-| `behaviorci diff` | Compare runs against baseline |
-| `behaviorci add-failure` | Add failed case to regression tests |
+Run a bundle and save results as a baseline for future comparisons.
+
+```bash
+behaviorci promote BUNDLE_PATH [OPTIONS]
+```
+
+### Arguments
+
+| Argument | Description |
+|----------|-------------|
+| `BUNDLE_PATH` | Path to bundle.yaml |
+
+### Options
+
+| Option | Description |
+|--------|-------------|
+| `-q, --quiet` | Minimal output |
+| `--ci-gate` | Exit non-zero if thresholds fail |
+
+### Example
+
+```bash
+# Run and save as baseline
+behaviorci promote bundles/my-feature/bundle.yaml
+
+# Quiet mode for CI
+behaviorci promote bundles/my-feature/bundle.yaml --quiet
+```
+
+---
+
+## behaviorci diff
+
+Compare current run against a baseline to detect regressions.
+
+```bash
+behaviorci diff BUNDLE_PATH [OPTIONS]
+```
+
+### Arguments
+
+| Argument | Description |
+|----------|-------------|
+| `BUNDLE_PATH` | Path to bundle.yaml |
+
+### Options
+
+| Option | Description |
+|--------|-------------|
+| `-b, --baseline` | Baseline ID or "latest" (default: latest) |
+| `-f, --format` | Output format: console, json, markdown |
+| `-o, --output` | Write report to file |
+| `-v, --verbose` | Show detailed output |
+| `--ci-gate` | Exit non-zero if regressions found |
+
+### Example
+
+```bash
+# Compare against latest baseline
+behaviorci diff bundles/my-feature/bundle.yaml
+
+# JSON output for CI
+behaviorci diff bundles/my-feature/bundle.yaml --format json --output diff.json
+
+# CI regression check
+behaviorci diff bundles/my-feature/bundle.yaml --ci-gate
+```
+
+---
+
+## Agent Bundle Commands
+
+### behaviorci agent init
+
+Scaffold a new Agent Bundle.
+
+```bash
+behaviorci agent init [PATH] [OPTIONS]
+```
+
+### behaviorci agent validate
+
+Validate an Agent Bundle.
+
+```bash
+behaviorci agent validate BUNDLE_PATH
+```
+
+### behaviorci agent run
+
+Run Agent Bundle tests.
+
+```bash
+behaviorci agent run BUNDLE_PATH [OPTIONS]
+```

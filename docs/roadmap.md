@@ -1,6 +1,6 @@
 # Roadmap
 
-## Current Version: v0.1.0 ✅
+## Current Version: v0.2.0 ✅
 
 ### Core Features (Complete)
 - [x] Behavior Bundle specification
@@ -16,27 +16,32 @@
 - [x] Example bundle
 - [x] Comprehensive test suite
 
----
+### Agent Bundle (v0.2 - Complete)
+- [x] Agent Bundle specification (`agent.yaml`)
+- [x] Tool calling agent support
+- [x] Agent task definition (JSONL)
+- [x] Agent evaluation rules
+- [x] CLI: `agent init`, `agent validate`, `agent run`
+- [x] System prompt management
+- [x] Memory/execution configuration
 
-## v0.2: Diff & Baseline
-
-**Theme**: Compare runs against baselines to detect regressions.
-
-### Features
-- [ ] Baseline storage (local JSON files)
-- [ ] `behaviorci promote` — Save current run as baseline
-- [ ] `behaviorci diff` — Compare run against baseline
-- [ ] Diff report showing:
+### Diff & Baseline (v0.2 - Complete)
+- [x] Baseline storage (local JSON files)
+- [x] `behaviorci promote` — Save current run as baseline
+- [x] `behaviorci diff` — Compare run against baseline
+- [x] Diff report showing:
   - New failures
   - Fixed failures
   - Metric changes
-- [ ] PR comments integration (GitHub Actions)
-- [ ] Markdown diff reports for PRs
+- [x] PR comments integration (GitHub Actions)
+- [x] Markdown diff reports for PRs
+- [x] `--ci-gate` for CI/CD regression blocking
 
-### Use Cases
+### Use Cases (v0.2)
 - Detect which cases regressed after a prompt change
 - Accept intentional changes by promoting new baseline
 - Block PRs that introduce new failures
+- Test AI agent tool-calling behavior
 
 ---
 
@@ -125,5 +130,6 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
 | Version | Target | Status |
 |---------|--------|--------|
 | v0.1.0 | Q1 2026 | ✅ Complete |
-| v0.2.0 | Q2 2026 | 🔜 Planned |
-| v0.3.0 | Q3 2026 | 📋 Planned |
+| v0.2.0 | Q1 2026 | ✅ Complete |
+| v0.3.0 | Q2 2026 | 🔜 Planned |
+| v0.4.0 | Q3 2026 | 📋 Planned |

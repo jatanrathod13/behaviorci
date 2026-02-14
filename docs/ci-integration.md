@@ -14,6 +14,16 @@ If thresholds fail → exit code 1 → build fails.
 
 ---
 
+## Test Runner Note
+
+If your CI environment has globally installed pytest plugins that interfere with runs, disable plugin autoloading for clean test runs:
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest
+```
+
+---
+
 ## GitHub Actions
 
 ### Basic Workflow
