@@ -27,8 +27,8 @@
 
 ### Diff & Baseline (v0.2 - Complete)
 - [x] Baseline storage (local JSON files)
-- [x] `behaviorci promote` — Save current run as baseline
-- [x] `behaviorci diff` — Compare run against baseline
+- [x] `promptguard promote` — Save current run as baseline
+- [x] `promptguard diff` — Compare run against baseline
 - [x] Diff report showing:
   - New failures
   - Fixed failures
@@ -55,7 +55,7 @@
   - `safety` — No harmful content indicators
   - `json-only` — Output must be valid JSON
   - `length-limits` — Response length bounds
-- [ ] `behaviorci add-failure` — Add failed case to regression suite
+- [ ] `promptguard add-failure` — Add failed case to regression suite
 - [ ] Failure taxonomies (categorize failures)
 - [ ] Custom policy pack authoring
 

@@ -1,13 +1,13 @@
 # Architecture
 
-BehaviorCI is intentionally simple—a file-first, CI-friendly tool for validating LLM behavior.
+PromptGuard is intentionally simple—a file-first, CI-friendly tool for validating LLM behavior.
 
 ## System Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                          CLI Layer                               │
-│  behaviorci init | validate | run                                │
+│  promptguard init | validate | run                                │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
@@ -63,7 +63,7 @@ BehaviorCI is intentionally simple—a file-first, CI-friendly tool for validati
 
 ## Core Components
 
-### Bundle Module (`behaviorci/bundle/`)
+### Bundle Module (`promptguard/bundle/`)
 
 | File | Purpose |
 |------|---------|
@@ -71,7 +71,7 @@ BehaviorCI is intentionally simple—a file-first, CI-friendly tool for validati
 | `loader.py` | YAML parsing, validation, file reference resolution |
 | `dataset.py` | JSONL parsing with iteration support |
 
-### Provider Module (`behaviorci/providers/`)
+### Provider Module (`promptguard/providers/`)
 
 | File | Purpose |
 |------|---------|
@@ -81,7 +81,7 @@ BehaviorCI is intentionally simple—a file-first, CI-friendly tool for validati
 | `anthropic.py` | Anthropic API adapter (Claude) |
 | `mock.py` | Deterministic mock for testing |
 
-### Runner Module (`behaviorci/runner/`)
+### Runner Module (`promptguard/runner/`)
 
 | File | Purpose |
 |------|---------|
@@ -89,7 +89,7 @@ BehaviorCI is intentionally simple—a file-first, CI-friendly tool for validati
 | `evaluator.py` | JSON schema and invariant validation |
 | `thresholds.py` | Metric computation and threshold checking |
 
-### Reporter Module (`behaviorci/reporters/`)
+### Reporter Module (`promptguard/reporters/`)
 
 | File | Purpose |
 |------|---------|
@@ -149,7 +149,7 @@ sys.exit(0 if result.passed else 1)
 Custom exception hierarchy:
 
 ```
-BehaviorCIError
+PromptGuardError
 ├── BundleError
 │   ├── BundleNotFoundError
 │   └── BundleValidationError

@@ -1,10 +1,10 @@
-# BehaviorCI
+# PromptGuard
 
-[![PyPI version](https://img.shields.io/pypi/v/behaviorci.svg)](https://pypi.org/project/behaviorci/)
-[![Python versions](https://img.shields.io/pypi/pyversions/behaviorci.svg)](https://pypi.org/project/behaviorci/)
-[![CI](https://github.com/jatanrathod13/behaviorci/actions/workflows/ci.yaml/badge.svg)](https://github.com/jatanrathod13/behaviorci/actions/workflows/ci.yaml)
+[![PyPI version](https://img.shields.io/pypi/v/promptguard.svg)](https://pypi.org/project/promptguard/)
+[![Python versions](https://img.shields.io/pypi/pyversions/promptguard.svg)](https://pypi.org/project/promptguard/)
+[![CI](https://github.com/jatanrathod13/promptguard/actions/workflows/ci.yaml/badge.svg)](https://github.com/jatanrathod13/promptguard/actions/workflows/ci.yaml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Downloads](https://img.shields.io/pypi/dm/behaviorci)](https://pypi.org/project/behaviorci/)
+[![Downloads](https://img.shields.io/pypi/dm/promptguard)](https://pypi.org/project/promptguard/)
 
 **CI/CD for LLM behavior.**
 
@@ -20,7 +20,7 @@ Think **Jest for prompts** — write tests, run CI, block bad changes.
 
 ---
 
-## Why BehaviorCI?
+## Why PromptGuard?
 
 LLM behavior silently regresses:
 - Prompt tweaks break edge cases you forgot about
@@ -28,7 +28,7 @@ LLM behavior silently regresses:
 - Fixes aren't captured as tests — same bugs resurface
 - No way to know if "improvements" actually work
 
-**BehaviorCI turns LLM behavior into engineering:**
+**PromptGuard turns LLM behavior into engineering:**
 
 | Before | After |
 |--------|-------|
@@ -41,7 +41,7 @@ LLM behavior silently regresses:
 
 ## What Makes It Different
 
-| Feature | BehaviorCI | PromptFoo | Langfuse |
+| Feature | PromptGuard | PromptFoo | Langfuse |
 |---------|------------|-----------|----------|
 | **Focus** | Testing & regression detection | Prompt comparison | Observability |
 | **CI Gate** | ✅ Native fail-on-regression | ❌ No | ❌ No |
@@ -55,7 +55,7 @@ LLM behavior silently regresses:
 ```
 PromptFoo = "Which prompt is better?" (experimentation)
 Langfuse  = "How is our prompt performing?" (monitoring)
-BehaviorCI = "Did our prompt break?" (testing & gating)
+PromptGuard = "Did our prompt break?" (testing & gating)
 ```
 
 **Not just evaluation — it's CI/CD.**
@@ -65,7 +65,7 @@ BehaviorCI = "Did our prompt break?" (testing & gating)
 ## Installation
 
 ```bash
-pip install behaviorci
+pip install promptguard
 ```
 
 ---
@@ -74,17 +74,17 @@ pip install behaviorci
 
 ```bash
 # 1. Create an example bundle
-behaviorci init bundles/my-test
+promptguard init bundles/my-test
 
 # 2. Validate configuration
-behaviorci validate bundles/my-test/bundle.yaml
+promptguard validate bundles/my-test/bundle.yaml
 
 # 3. Run tests (mock provider - no API key needed)
-behaviorci run bundles/my-test/bundle.yaml --provider mock
+promptguard run bundles/my-test/bundle.yaml --provider mock
 
 # 4. Run with OpenAI
 export OPENAI_API_KEY=sk-xxx
-behaviorci run bundles/my-test/bundle.yaml
+promptguard run bundles/my-test/bundle.yaml
 ```
 
 **If thresholds fail → exit code 1 → CI fails.**
@@ -171,10 +171,10 @@ thresholds:
 ### Baseline & Diff (v0.2+)
 ```bash
 # Save current run as baseline
-behaviorci promote bundles/my-feature/
+promptguard promote bundles/my-feature/
 
 # Compare against baseline
-behaviorci diff bundles/my-feature/
+promptguard diff bundles/my-feature/
 # Shows: new failures, fixed failures, metric changes
 ```
 
@@ -203,17 +203,17 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install BehaviorCI
-        run: pip install behaviorci
+      - name: Install PromptGuard
+        run: pip install promptguard
 
       - name: Run tests
-        run: behaviorci run bundles/my-feature/bundle.yaml
+        run: promptguard run bundles/my-feature/bundle.yaml
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
       # v0.2+: Block on regressions
       - name: Diff check
-        run: behaviorci diff bundles/my-feature/ --ci-gate
+        run: promptguard diff bundles/my-feature/ --ci-gate
 ```
 
 See [docs/ci-integration.md](docs/ci-integration.md) for GitLab, CircleCI, and Azure DevOps.
@@ -224,21 +224,21 @@ See [docs/ci-integration.md](docs/ci-integration.md) for GitLab, CircleCI, and A
 
 | Command | Description |
 |---------|-------------|
-| `behaviorci init [path]` | Scaffold new bundle |
-| `behaviorci validate <bundle>` | Validate configuration |
-| `behaviorci run <bundle>` | Execute tests |
-| `behaviorci promote <bundle>` | Save as baseline (v0.2+) |
-| `behaviorci diff <bundle>` | Compare vs baseline (v0.2+) |
-| `behaviorci agent init` | Scaffold agent bundle (v0.2+) |
-| `behaviorci agent run` | Run agent tests (v0.2+) |
+| `promptguard init [path]` | Scaffold new bundle |
+| `promptguard validate <bundle>` | Validate configuration |
+| `promptguard run <bundle>` | Execute tests |
+| `promptguard promote <bundle>` | Save as baseline (v0.2+) |
+| `promptguard diff <bundle>` | Compare vs baseline (v0.2+) |
+| `promptguard agent init` | Scaffold agent bundle (v0.2+) |
+| `promptguard agent run` | Run agent tests (v0.2+) |
 
 ### Options
 
 ```bash
-behaviorci run bundle.yaml --provider openai   # Override provider
-behaviorci run bundle.yaml --format json       # JSON output
-behaviorci run bundle.yaml --output report.md  # Write to file
-behaviorci run bundle.yaml --ci-gate          # Fail if thresholds fail
+promptguard run bundle.yaml --provider openai   # Override provider
+promptguard run bundle.yaml --format json       # JSON output
+promptguard run bundle.yaml --output report.md  # Write to file
+promptguard run bundle.yaml --ci-gate          # Fail if thresholds fail
 ```
 
 ---
@@ -271,8 +271,8 @@ behaviorci run bundle.yaml --ci-gate          # Fail if thresholds fail
 
 ```bash
 # Clone
-git clone https://github.com/jatanrathod13/behaviorci
-cd behaviorci
+git clone https://github.com/jatanrathod13/promptguard
+cd promptguard
 
 # Setup
 python -m venv .venv && source .venv/bin/activate
@@ -282,10 +282,10 @@ pip install -e ".[dev]"
 pytest tests/ -v
 
 # Lint
-ruff check behaviorci/
+ruff check promptguard/
 
 # Type check
-mypy behaviorci/
+mypy promptguard/
 ```
 
 ---

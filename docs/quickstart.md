@@ -1,17 +1,17 @@
 # Quickstart
 
-Get started with BehaviorCI in 5 minutes.
+Get started with PromptGuard in 5 minutes.
 
 ## Installation
 
 ```bash
-pip install behaviorci
+pip install promptguard
 ```
 
 Verify installation:
 ```bash
-behaviorci --version
-# behaviorci, version 0.1.0
+promptguard --version
+# promptguard, version 0.1.0
 ```
 
 ## Create Your First Bundle
@@ -19,7 +19,7 @@ behaviorci --version
 Scaffold an example bundle:
 
 ```bash
-behaviorci init bundles/my-first-test
+promptguard init bundles/my-first-test
 ```
 
 This creates:
@@ -36,7 +36,7 @@ bundles/my-first-test/
 Check that your configuration is valid:
 
 ```bash
-behaviorci validate bundles/my-first-test/bundle.yaml
+promptguard validate bundles/my-first-test/bundle.yaml
 ```
 
 Expected output:
@@ -57,7 +57,7 @@ Expected output:
 Test without API calls:
 
 ```bash
-behaviorci run bundles/my-first-test/bundle.yaml
+promptguard run bundles/my-first-test/bundle.yaml
 ```
 
 The mock provider returns deterministic responses—great for testing your setup.
@@ -69,11 +69,11 @@ Set your API key and run:
 ```bash
 # OpenAI
 export OPENAI_API_KEY=sk-your-key-here
-behaviorci run bundles/my-first-test/bundle.yaml --provider openai
+promptguard run bundles/my-first-test/bundle.yaml --provider openai
 
 # Anthropic
 export ANTHROPIC_API_KEY=your-key-here
-behaviorci run bundles/my-first-test/bundle.yaml --provider anthropic
+promptguard run bundles/my-first-test/bundle.yaml --provider anthropic
 ```
 
 ## Customize Your Bundle
@@ -152,8 +152,8 @@ jobs:
     - uses: actions/setup-python@v5
       with:
         python-version: "3.11"
-    - run: pip install behaviorci
-    - run: behaviorci run bundles/my-first-test/bundle.yaml
+    - run: pip install promptguard
+    - run: promptguard run bundles/my-first-test/bundle.yaml
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 ```
@@ -165,7 +165,7 @@ Now PRs will fail if your LLM behavior regresses!
 - 📖 [Behavior Bundles](behavior-bundles.md) — Full bundle specification
 - 🖥️ [CLI Reference](cli.md) — All commands and options
 - 🔧 [CI Integration](ci-integration.md) — GitHub, GitLab, CircleCI guides
-- 🏗️ [Architecture](architecture.md) — How BehaviorCI works
+- 🏗️ [Architecture](architecture.md) — How PromptGuard works
 - ❓ [FAQ](faq.md) — Common questions
 
 ## Example: Real-World Bundle

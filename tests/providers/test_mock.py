@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from behaviorci.providers.mock import MockProvider
-from behaviorci.exceptions import ProviderAPIError
+from promptguard.providers.mock import MockProvider
+from promptguard.exceptions import ProviderAPIError
 
 
 class TestMockProvider:

@@ -1,6 +1,6 @@
-# Contributing to BehaviorCI
+# Contributing to PromptGuard
 
-BehaviorCI is **behavior release engineering**.
+PromptGuard is **behavior release engineering**.
 
 We optimize for:
 - Correctness over features
@@ -12,8 +12,8 @@ We optimize for:
 ## Dev setup
 
 ```bash
-git clone https://github.com/<org>/behaviorci
-cd behaviorci
+git clone https://github.com/<org>/promptguard
+cd promptguard
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 pytest

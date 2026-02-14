@@ -2,21 +2,21 @@
 
 ## General
 
-**What is BehaviorCI?**
+**What is PromptGuard?**
 
-BehaviorCI is a CI/CD tool for LLM behavior testing. It validates that your prompts produce expected outputs and fails builds when behavior regresses.
+PromptGuard is a CI/CD tool for LLM behavior testing. It validates that your prompts produce expected outputs and fails builds when behavior regresses.
 
 **Is this prompt optimization?**
 
-No. BehaviorCI enforces constraints, not quality. It checks that outputs match schemas and pass invariants—it doesn't suggest improvements.
+No. PromptGuard enforces constraints, not quality. It checks that outputs match schemas and pass invariants—it doesn't suggest improvements.
 
 **Is this observability/monitoring?**
 
-No. BehaviorCI runs in CI before deployment. For production monitoring, use tools like LangSmith, Helicone, or custom logging.
+No. PromptGuard runs in CI before deployment. For production monitoring, use tools like LangSmith, Helicone, or custom logging.
 
 **Can it run locally?**
 
-Yes. Install with `pip install behaviorci` and run `behaviorci run bundles/my-feature/bundle.yaml`. Use `--provider mock` for testing without API keys.
+Yes. Install with `pip install promptguard` and run `promptguard run bundles/my-feature/bundle.yaml`. Use `--provider mock` for testing without API keys.
 
 ---
 
@@ -48,7 +48,7 @@ JSONL (JSON Lines) enables:
 
 **How are prompts rendered?**
 
-BehaviorCI uses [Jinja2](https://jinja.palletsprojects.com/) templating. Variables from the dataset's `input` field are substituted into `{{ variable }}` placeholders.
+PromptGuard uses [Jinja2](https://jinja.palletsprojects.com/) templating. Variables from the dataset's `input` field are substituted into `{{ variable }}` placeholders.
 
 **What makes a test case pass?**
 
@@ -92,7 +92,7 @@ Yes. Implement the `LLMProvider` abstract class and register with `@register_pro
 
 Use `--provider mock` for validation and basic testing:
 ```bash
-behaviorci run bundle.yaml --provider mock
+promptguard run bundle.yaml --provider mock
 ```
 Reserve real providers for critical paths or scheduled runs.
 
@@ -125,7 +125,7 @@ If a schema is configured and output isn't JSON, schema validation fails. Invari
 
 **How do I fail PRs on behavior regression?**
 
-BehaviorCI returns non-zero exit codes when thresholds fail. CI platforms automatically fail the build/PR.
+PromptGuard returns non-zero exit codes when thresholds fail. CI platforms automatically fail the build/PR.
 
 **Should I use real providers in CI?**
 
@@ -183,13 +183,13 @@ prompt_path: /abs/path.md   # ✗ Don't use absolute paths
 
 - PR comments with diff reports
 - Baseline storage and comparison
-- `behaviorci diff` command
+- `promptguard diff` command
 
 **What's planned for v0.3?**
 
 - Policy packs (reusable rule sets)
 - Failure taxonomies (categorize failures)
-- `behaviorci add-failure` command
+- `promptguard add-failure` command
 
 **Can I contribute?**
 

@@ -1,4 +1,4 @@
-"""Shared test fixtures for BehaviorCI tests."""
+"""Shared test fixtures for PromptGuard tests."""
 
 from __future__ import annotations
 

@@ -1,13 +1,13 @@
 # CI Integration
 
-BehaviorCI is designed to integrate seamlessly with any CI/CD platform. Non-zero exit codes fail the build when behavior regresses.
+PromptGuard is designed to integrate seamlessly with any CI/CD platform. Non-zero exit codes fail the build when behavior regresses.
 
 ## Quick Start
 
 ```yaml
 # Any CI platform
-- run: pip install behaviorci
-- run: behaviorci run bundles/my-feature/bundle.yaml
+- run: pip install promptguard
+- run: promptguard run bundles/my-feature/bundle.yaml
 ```
 
 If thresholds fail → exit code 1 → build fails.
@@ -50,19 +50,19 @@ jobs:
       with:
         python-version: "3.11"
     
-    - name: Install BehaviorCI
-      run: pip install behaviorci
+    - name: Install PromptGuard
+      run: pip install promptguard
     
     - name: Validate bundles
       run: |
         for bundle in bundles/*/bundle.yaml; do
-          behaviorci validate "$bundle"
+          promptguard validate "$bundle"
         done
     
     - name: Run behavior tests
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      run: behaviorci run bundles/my-feature/bundle.yaml
+      run: promptguard run bundles/my-feature/bundle.yaml
 ```
 
 ### With Artifacts
@@ -74,7 +74,7 @@ Save reports as CI artifacts:
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
-        behaviorci run bundles/my-feature/bundle.yaml \
+        promptguard run bundles/my-feature/bundle.yaml \
           --format json \
           --output behavior-report.json
       continue-on-error: true
@@ -96,7 +96,7 @@ Save reports as CI artifacts:
         failed=0
         for bundle in bundles/*/bundle.yaml; do
           echo "Running $bundle..."
-          if ! behaviorci run "$bundle"; then
+          if ! promptguard run "$bundle"; then
             failed=1
           fi
         done
@@ -109,7 +109,7 @@ For testing the pipeline without real API calls:
 
 ```yaml
     - name: Run with mock provider
-      run: behaviorci run bundles/my-feature/bundle.yaml --provider mock
+      run: promptguard run bundles/my-feature/bundle.yaml --provider mock
 ```
 
 ---
@@ -123,11 +123,11 @@ behavior-tests:
   stage: test
   
   before_script:
-    - pip install behaviorci
+    - pip install promptguard
   
   script:
-    - behaviorci validate bundles/my-feature/bundle.yaml
-    - behaviorci run bundles/my-feature/bundle.yaml
+    - promptguard validate bundles/my-feature/bundle.yaml
+    - promptguard run bundles/my-feature/bundle.yaml
   
   variables:
     OPENAI_API_KEY: $OPENAI_API_KEY
@@ -157,12 +157,12 @@ jobs:
       - checkout
       
       - run:
-          name: Install BehaviorCI
-          command: pip install behaviorci
+          name: Install PromptGuard
+          command: pip install promptguard
       
       - run:
           name: Run behavior tests
-          command: behaviorci run bundles/my-feature/bundle.yaml
+          command: promptguard run bundles/my-feature/bundle.yaml
           environment:
             OPENAI_API_KEY: ${OPENAI_API_KEY}
 
@@ -189,10 +189,10 @@ steps:
   inputs:
     versionSpec: '3.11'
 
-- script: pip install behaviorci
-  displayName: Install BehaviorCI
+- script: pip install promptguard
+  displayName: Install PromptGuard
 
-- script: behaviorci run bundles/my-feature/bundle.yaml
+- script: promptguard run bundles/my-feature/bundle.yaml
   displayName: Run behavior tests
   env:
     OPENAI_API_KEY: $(OPENAI_API_KEY)
@@ -225,14 +225,14 @@ steps:
 ### Strict: Block All Failures
 
 ```yaml
-- run: behaviorci run bundles/my-feature/bundle.yaml
+- run: promptguard run bundles/my-feature/bundle.yaml
   # Default: fails if any threshold not met
 ```
 
 ### Lenient: Warn But Don't Block
 
 ```yaml
-- run: behaviorci run bundles/my-feature/bundle.yaml
+- run: promptguard run bundles/my-feature/bundle.yaml
   continue-on-error: true
 ```
 
@@ -242,10 +242,10 @@ steps:
 - run: |
     if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
       # Use mock for PRs
-      behaviorci run bundles/my-feature/bundle.yaml --provider mock
+      promptguard run bundles/my-feature/bundle.yaml --provider mock
     else
       # Real tests on main
-      behaviorci run bundles/my-feature/bundle.yaml
+      promptguard run bundles/my-feature/bundle.yaml
     fi
 ```
 
@@ -261,7 +261,7 @@ Speed up CI by caching dependencies:
 - uses: actions/cache@v4
   with:
     path: ~/.cache/pip
-    key: ${{ runner.os }}-pip-behaviorci
+    key: ${{ runner.os }}-pip-promptguard
 ```
 
 ---
@@ -286,8 +286,8 @@ jobs:
     - uses: actions/setup-python@v5
       with:
         python-version: "3.11"
-    - run: pip install behaviorci
-    - run: behaviorci run bundles/${{ matrix.bundle }}/bundle.yaml
+    - run: pip install promptguard
+    - run: promptguard run bundles/${{ matrix.bundle }}/bundle.yaml
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 ```

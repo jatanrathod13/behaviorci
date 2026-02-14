@@ -6,9 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from behaviorci.bundle.loader import BundleLoader, load_bundle
-from behaviorci.bundle.models import BundleConfig
-from behaviorci.exceptions import BundleNotFoundError, BundleValidationError
+from promptguard.bundle.loader import BundleLoader, load_bundle
+from promptguard.bundle.models import BundleConfig
+from promptguard.exceptions import BundleNotFoundError, BundleValidationError
 
 
 class TestBundleLoader:

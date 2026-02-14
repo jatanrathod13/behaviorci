@@ -6,9 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from behaviorci.bundle.loader import load_bundle
-from behaviorci.providers.mock import MockProvider
-from behaviorci.runner import Runner
+from promptguard.bundle.loader import load_bundle
+from promptguard.providers.mock import MockProvider
+from promptguard.runner import Runner
 
 
 class TestRunner:

@@ -1,6 +1,6 @@
 name: example-bundle
 version: "1.0"
-description: An example Behavior Bundle demonstrating BehaviorCI features
+description: An example Behavior Bundle demonstrating PromptGuard features
 
 prompt_path: prompt.md
 dataset_path: dataset.jsonl

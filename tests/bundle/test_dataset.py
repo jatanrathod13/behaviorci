@@ -7,8 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from behaviorci.bundle.dataset import Dataset, DatasetCase
-from behaviorci.exceptions import DatasetError
+from promptguard.bundle.dataset import Dataset, DatasetCase
+from promptguard.exceptions import DatasetError
 
 
 class TestDataset:

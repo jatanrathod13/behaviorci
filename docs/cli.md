@@ -1,36 +1,36 @@
 # CLI Reference
 
-BehaviorCI provides a command-line interface for managing and running Behavior Bundles.
+PromptGuard provides a command-line interface for managing and running Behavior Bundles.
 
 ## Installation
 
 ```bash
-pip install behaviorci
+pip install promptguard
 ```
 
 ## Commands Overview
 
 | Command | Description |
 |---------|-------------|
-| `behaviorci init` | Scaffold a new example bundle |
-| `behaviorci validate` | Validate bundle configuration |
-| `behaviorci run` | Execute tests and emit report |
-| `behaviorci promote` | Run bundle and save as baseline |
-| `behaviorci diff` | Compare run against baseline |
-| `behaviorci agent init` | Scaffold a new agent bundle |
-| `behaviorci agent validate` | Validate agent bundle |
-| `behaviorci agent run` | Run agent bundle tests |
-| `behaviorci --version` | Show version |
-| `behaviorci --help` | Show help |
+| `promptguard init` | Scaffold a new example bundle |
+| `promptguard validate` | Validate bundle configuration |
+| `promptguard run` | Execute tests and emit report |
+| `promptguard promote` | Run bundle and save as baseline |
+| `promptguard diff` | Compare run against baseline |
+| `promptguard agent init` | Scaffold a new agent bundle |
+| `promptguard agent validate` | Validate agent bundle |
+| `promptguard agent run` | Run agent bundle tests |
+| `promptguard --version` | Show version |
+| `promptguard --help` | Show help |
 
 ---
 
-## behaviorci init
+## promptguard init
 
 Scaffold a new Behavior Bundle with example files.
 
 ```bash
-behaviorci init [PATH] [OPTIONS]
+promptguard init [PATH] [OPTIONS]
 ```
 
 ### Arguments
@@ -49,10 +49,10 @@ behaviorci init [PATH] [OPTIONS]
 
 ```bash
 # Create example bundle
-behaviorci init bundles/my-feature
+promptguard init bundles/my-feature
 
 # Overwrite existing
-behaviorci init bundles/my-feature --force
+promptguard init bundles/my-feature --force
 ```
 
 ### Created Files
@@ -67,12 +67,12 @@ bundles/my-feature/
 
 ---
 
-## behaviorci validate
+## promptguard validate
 
 Validate a bundle configuration without running tests.
 
 ```bash
-behaviorci validate BUNDLE_PATH
+promptguard validate BUNDLE_PATH
 ```
 
 ### Arguments
@@ -84,7 +84,7 @@ behaviorci validate BUNDLE_PATH
 ### Example
 
 ```bash
-behaviorci validate bundles/my-feature/bundle.yaml
+promptguard validate bundles/my-feature/bundle.yaml
 ```
 
 ### Output
@@ -110,12 +110,12 @@ behaviorci validate bundles/my-feature/bundle.yaml
 
 ---
 
-## behaviorci run
+## promptguard run
 
 Execute a bundle's test cases and emit a report.
 
 ```bash
-behaviorci run BUNDLE_PATH [OPTIONS]
+promptguard run BUNDLE_PATH [OPTIONS]
 ```
 
 ### Arguments
@@ -139,19 +139,19 @@ behaviorci run BUNDLE_PATH [OPTIONS]
 
 ```bash
 # Basic run
-behaviorci run bundles/my-feature/bundle.yaml
+promptguard run bundles/my-feature/bundle.yaml
 
 # With mock provider (no API calls)
-behaviorci run bundles/my-feature/bundle.yaml --provider mock
+promptguard run bundles/my-feature/bundle.yaml --provider mock
 
 # JSON output to file
-behaviorci run bundles/my-feature/bundle.yaml --format json --output report.json
+promptguard run bundles/my-feature/bundle.yaml --format json --output report.json
 
 # Markdown for CI artifacts
-behaviorci run bundles/my-feature/bundle.yaml --format markdown --output report.md
+promptguard run bundles/my-feature/bundle.yaml --format markdown --output report.md
 
 # Verbose with real provider
-OPENAI_API_KEY=sk-xxx behaviorci run bundles/my-feature/bundle.yaml --verbose
+OPENAI_API_KEY=sk-xxx promptguard run bundles/my-feature/bundle.yaml --verbose
 ```
 
 ### Console Output
@@ -205,7 +205,7 @@ Thresholds
 
 ```bash
 export OPENAI_API_KEY=sk-xxx
-behaviorci run bundles/my-feature/bundle.yaml
+promptguard run bundles/my-feature/bundle.yaml
 ```
 
 ---
@@ -217,7 +217,7 @@ behaviorci run bundles/my-feature/bundle.yaml
 Human-readable terminal output with colors and tables.
 
 ```bash
-behaviorci run bundle.yaml --format console
+promptguard run bundle.yaml --format console
 ```
 
 ### JSON
@@ -225,7 +225,7 @@ behaviorci run bundle.yaml --format console
 Machine-readable output for CI pipelines:
 
 ```bash
-behaviorci run bundle.yaml --format json --output report.json
+promptguard run bundle.yaml --format json --output report.json
 ```
 
 ```json
@@ -258,11 +258,11 @@ behaviorci run bundle.yaml --format json --output report.json
 GitHub-friendly output for PR comments:
 
 ```bash
-behaviorci run bundle.yaml --format markdown --output report.md
+promptguard run bundle.yaml --format markdown --output report.md
 ```
 
 ```markdown
-# BehaviorCI Report: my-feature
+# PromptGuard Report: my-feature
 
 **Status**: ✅ PASSED
 **Duration**: 1234ms
@@ -278,12 +278,12 @@ behaviorci run bundle.yaml --format markdown --output report.md
 
 ---
 
-## behaviorci promote
+## promptguard promote
 
 Run a bundle and save results as a baseline for future comparisons.
 
 ```bash
-behaviorci promote BUNDLE_PATH [OPTIONS]
+promptguard promote BUNDLE_PATH [OPTIONS]
 ```
 
 ### Arguments
@@ -303,20 +303,20 @@ behaviorci promote BUNDLE_PATH [OPTIONS]
 
 ```bash
 # Run and save as baseline
-behaviorci promote bundles/my-feature/bundle.yaml
+promptguard promote bundles/my-feature/bundle.yaml
 
 # Quiet mode for CI
-behaviorci promote bundles/my-feature/bundle.yaml --quiet
+promptguard promote bundles/my-feature/bundle.yaml --quiet
 ```
 
 ---
 
-## behaviorci diff
+## promptguard diff
 
 Compare current run against a baseline to detect regressions.
 
 ```bash
-behaviorci diff BUNDLE_PATH [OPTIONS]
+promptguard diff BUNDLE_PATH [OPTIONS]
 ```
 
 ### Arguments
@@ -339,39 +339,39 @@ behaviorci diff BUNDLE_PATH [OPTIONS]
 
 ```bash
 # Compare against latest baseline
-behaviorci diff bundles/my-feature/bundle.yaml
+promptguard diff bundles/my-feature/bundle.yaml
 
 # JSON output for CI
-behaviorci diff bundles/my-feature/bundle.yaml --format json --output diff.json
+promptguard diff bundles/my-feature/bundle.yaml --format json --output diff.json
 
 # CI regression check
-behaviorci diff bundles/my-feature/bundle.yaml --ci-gate
+promptguard diff bundles/my-feature/bundle.yaml --ci-gate
 ```
 
 ---
 
 ## Agent Bundle Commands
 
-### behaviorci agent init
+### promptguard agent init
 
 Scaffold a new Agent Bundle.
 
 ```bash
-behaviorci agent init [PATH] [OPTIONS]
+promptguard agent init [PATH] [OPTIONS]
 ```
 
-### behaviorci agent validate
+### promptguard agent validate
 
 Validate an Agent Bundle.
 
 ```bash
-behaviorci agent validate BUNDLE_PATH
+promptguard agent validate BUNDLE_PATH
 ```
 
-### behaviorci agent run
+### promptguard agent run
 
 Run Agent Bundle tests.
 
 ```bash
-behaviorci agent run BUNDLE_PATH [OPTIONS]
+promptguard agent run BUNDLE_PATH [OPTIONS]
 ```
